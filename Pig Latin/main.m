@@ -12,7 +12,10 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        InputCollector *inputCollector = [[InputCollector alloc] init];
         
+        NSString *input = [inputCollector inputForPrompt:@"Type in a word."];
+        NSLog(@"%@",[input stringByPigLatinization]);
         NSLog(@"Hello, World!");
     }
     return 0;

@@ -11,15 +11,35 @@
 
 @implementation NSString (StringToPigLatin)
 
-
 -(NSString *)stringByPigLatinization {
-    InputCollector *inputCollector = [[InputCollector alloc] init];
     
-    NSString *input = [inputCollector inputForPrompt:@"Type in a word."];
+    NSArray *vowels = @[@"a",@"e",@"i",@"o",@"u",@"y"];
+    NSArray *wordCollection = [self componentsSeparatedByString:@" "];
+
+    NSCharacterSet *vowelsSet = [NSCharacterSet characterSetWithCharactersInString: [vowels componentsJoinedByString:@""]];
     
+    NSMutableString *pigLatinString = [NSMutableString string];
     
-    NSString *pigLatinString;
+    for (NSString *word in wordCollection) {
+        NSMutableString *resultWord = [NSMutableString stringWithString:word];
+        
+        NSRange range = [word rangeOfCharacterFromSet:vowelsSet options:NSCaseInsensitiveSearch];
+        if (range.location == 0) {
+            [resultWord appendString:@"way"];
+        } else {
+        
+            NSString * beforeVowel = [word substringWithRange:NSMakeRange(0, range.location)];
+            
+            [resultWord deleteCharactersInRange:NSMakeRange(0, range.location)];
+            [resultWord appendFormat:@"%@ay",beforeVowel];
+            
+        }
+        
+        [pigLatinString appendFormat:@"%@ ", resultWord];
+    }
+    
     return pigLatinString;
+
 }
 
 @end

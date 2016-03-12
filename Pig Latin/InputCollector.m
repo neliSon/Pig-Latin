@@ -16,9 +16,7 @@
 - (NSString *) inputForPrompt:(NSString *)promptString {
     char userInput[255];
     
-    NSArray *consonants = @[@"b",@"c",@"d",@"f",@"g",@"h",@"j",@"k",@"l",@"m",@"n",@"p",@"q",@"r",@"s",@"t",@"v",@"w",@"x",@"z"];
-    NSArray *vowels = @[@"a",@"e",@"i",@"o",@"u",@"y"];
-    
+
     NSLog(@"%@", promptString);
     fgets(userInput, 255, stdin);
     NSString *inputString = [[NSString stringWithUTF8String: userInput] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
